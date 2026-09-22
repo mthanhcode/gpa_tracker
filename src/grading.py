@@ -26,3 +26,33 @@ def convert_score(score, table = GRADE_TABLE):
         if score >= min_score:
             return letter, gqa4
     
+
+
+#Hàm 3: calculate_gpa
+def calculate_gpa(courses):
+    if not courses:
+        return 0.0, 0.0
+
+    total_credits = 0
+    weighted_10 = 0.0
+    weighted_4 = 0.0
+
+    for course in courses:
+        #bỏ qua môn không tính GPA
+        if not course.get("counts_in_gpa", True):
+            continue
+            
+        credits = course["credits"]
+        score = course["final_score"]
+        _, gpa4 = convert_score(score)
+
+        total_credits += credits
+        weighted_10 += score * credits
+        weighted_4 += gpa4 * credits
+
+    if total_credits == 0:
+        return 0.0, 0.0
+
+    gpa_10 = round(weighted_10 / total_credits, 2)
+    gpa_4 = round(weighted_4 / total_credits, 2)
+    return gpa_10, gpa_4

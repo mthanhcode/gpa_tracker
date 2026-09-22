@@ -1,4 +1,4 @@
-from src.grading import calculate_final_score, convert_score
+from src.grading import calculate_final_score, convert_score, calculate_gpa
 
 def test_calculate_final_score_normal():
     #Kỹ thuật lập trình: 0.4*8.30 + 0.6*5.50 = 6.62 -> 6.6
@@ -36,3 +36,30 @@ def test_convert_score_invalid():
         convert_score(11.0)
     with pytest.raises(ValueError):
         convert_score(-1.0)
+
+def test_calculate_gpa_ky1():
+    #Dữ liệu kỳ 1 thật, trường tính: 7.77 / 3,06
+    courses = [
+        {"credits": 3, "final_score": 8.1, "counts_in_gpa": True},
+        {"credits": 2, "final_score": 9.4, "counts_in_gpa": True},
+        {"credits": 5, "final_score": 7.6, "counts_in_gpa": True},
+        {"credits": 2, "final_score": 9.1, "counts_in_gpa": True},
+        {"credits": 3, "final_score": 5.5, "counts_in_gpa": True},
+        {"credits": 3, "final_score": 8.0, "counts_in_gpa": True},
+        {"credits": 3, "final_score": 7.0, "counts_in_gpa": False},
+    ]
+    gpa_10, gpa_4 = calculate_gpa(courses)
+    assert gpa_10 == 7.77
+    assert gpa_4 == 3.06
+
+def test_calculate_gpa_empty():
+    #Danh sách môn học rỗng
+    assert calculate_gpa([]) == (0.0, 0.0)
+
+def test_calculate_gpa_all_excluded():
+    #Tất cả môn học không tính GPA
+    courses = [
+        {"credits": 3, "final_score": 8.0, "counts_in_gpa": False},
+        {"credits": 2, "final_score": 9.0, "counts_in_gpa": False},
+    ]
+    assert calculate_gpa(courses) == (0.0, 0.0)
