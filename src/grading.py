@@ -41,7 +41,7 @@ def calculate_gpa(courses):
         #bỏ qua môn không tính GPA
         if not course.get("counts_in_gpa", True):
             continue
-            
+
         credits = course["credits"]
         score = course["final_score"]
         _, gpa4 = convert_score(score)
@@ -56,3 +56,21 @@ def calculate_gpa(courses):
     gpa_10 = round(weighted_10 / total_credits, 2)
     gpa_4 = round(weighted_4 / total_credits, 2)
     return gpa_10, gpa_4
+
+
+    # Hàm 4: Classify
+    # Bảng xếp loại học lực của HITC
+    # Nguồn: qtkd.hitu.edu.vn, kiểm chứng: 3.06 --> khá, 2.25 --> trung bình
+CLASSIFICATION_TABLE = [
+        (3.60, "Xuất sắc"),
+        (3.20, "Giỏi"),
+        (2.50, "Khá"),
+        (2.00, "Trung bình"),
+        (0.00, "Yếu"),
+    ]
+
+def classify(gpa4):
+    for min_gpa, label in CLASSIFICATION_TABLE:
+        if gpa4 >= min_gpa:
+            return label
+    return "Yếu"

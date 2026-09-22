@@ -1,4 +1,4 @@
-from src.grading import calculate_final_score, convert_score, calculate_gpa
+from src.grading import calculate_final_score, convert_score, calculate_gpa, classify
 
 def test_calculate_final_score_normal():
     #Kỹ thuật lập trình: 0.4*8.30 + 0.6*5.50 = 6.62 -> 6.6
@@ -63,3 +63,23 @@ def test_calculate_gpa_all_excluded():
         {"credits": 2, "final_score": 9.0, "counts_in_gpa": False},
     ]
     assert calculate_gpa(courses) == (0.0, 0.0)
+
+
+def test_classify_xuat_sac():
+    assert classify(3.60) == "Xuất sắc"
+
+def test_classify_gioi():
+    assert classify(3.20) == "Giỏi"
+
+def test_classify_kha():
+    #kiểm chứng từ GPA 3.06 kỳ 1 thật
+    assert classify(3.06) == "Khá"
+
+def test_classify_trung_binh():
+    #kiểm chứng từ GPA 2.25 --> Trung bình
+    assert classify(2.25) == "Trung bình"
+
+def test_classify_yeu():
+    assert classify(1.50) == "Yếu"
+
+    
