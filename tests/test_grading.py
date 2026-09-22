@@ -1,4 +1,5 @@
 from src.grading import calculate_final_score, convert_score, calculate_gpa, classify
+from src.storage import load_courses, save_courses 
 
 def test_calculate_final_score_normal():
     #Kỹ thuật lập trình: 0.4*8.30 + 0.6*5.50 = 6.62 -> 6.6
@@ -82,4 +83,24 @@ def test_classify_trung_binh():
 def test_classify_yeu():
     assert classify(1.50) == "Yếu"
 
-    
+#sau khi đã import, thêm 3 test
+def test_load_courses_file_not_found(tmp_path, monkeypatch):
+    # File chưa tổn tại --> Trả về list rỗng
+    monkeypatch.setattr("src.storage.DATA_FILE", tmp_path / "course.json")
+    assert load_courses() == []
+
+def test_save_and_load_courses(tmp_path, monkeypatch):
+    # Lưu rồi đọc lại --> Phải khớp
+    monkeypatch.setattr("src.storage.DATA_FILE", tmp_path / "courses.json")
+    courses = [
+        {"name": "Toán", "credits": 3, "final_score": 8.1, "counts_in_gpa": True}
+    ]
+    save_courses(courses)
+    assert load_courses() == courses
+
+def test_load_courses_invalid_json(tmp_path, monkeypatch):
+    # FILE JSON bị hỏng -> Trả về list rồng
+    bad_file = tmp_path / "courses.json"
+    bad_file.write_text("this is not json", encoding = "utf-8")
+    monkeypatch.setattr("src.storage.DATA_FILE", bad_file)
+    assert load_courses() == []
