@@ -77,7 +77,7 @@ def show_courses(courses):
         print("-" * 65)
         for c in sem_courses:
             gpa_tag = "✅" if c["counts_in_gpa"] else "❌"
-            print(f"{stt:<5} {c['name']:<25} {c['credits']:<4} {c['final-score']:<8} {c['letter']:<6} {c['gpa4']:<6} {gpa_tag}")
+            print(f"{stt:<5} {c['name']:<25} {c['credits']:<4} {c['final_score']:<8} {c['letter']:<6} {c['gpa4']:<6} {gpa_tag}")
             stt += 1
 
 def show_gpa(courses):
