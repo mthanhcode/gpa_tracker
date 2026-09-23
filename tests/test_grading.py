@@ -86,7 +86,7 @@ def test_classify_yeu():
 #sau khi đã import, thêm 3 test
 def test_load_courses_file_not_found(tmp_path, monkeypatch):
     # File chưa tổn tại --> Trả về list rỗng
-    monkeypatch.setattr("src.storage.DATA_FILE", tmp_path / "course.json")
+    monkeypatch.setattr("src.storage.DATA_FILE", tmp_path / "courses.json")
     assert load_courses() == []
 
 def test_save_and_load_courses(tmp_path, monkeypatch):

@@ -2,11 +2,10 @@
 MIDTERM_WEIGHT = 0.4
 FINAL_WEIGHT = 0.6
 
+# Hàm 1:
 def calculate_final_score(midterm, final) :
     raw = MIDTERM_WEIGHT * midterm + FINAL_WEIGHT * final
     return round(raw, 1)
-
-
 # Bảng quy đổi điểm của HITC
 # (ngưỡng tối thiểu, điểm chữ, hệ 4)
 # Đã được kiểm chứng từ bảng điểm thật: 7.0 -> B, 6.9 -> C, 8.6 -> A
@@ -18,7 +17,7 @@ GRADE_TABLE = [
     (0.0, "F", 0.0),
 ]
 
-
+# Hàm 2:
 def convert_score(score, table = GRADE_TABLE):
     if not (0.0 <= score <= 10.0):
         raise ValueError(f"Điểm không hợp lệ: {score}. Phải từ 0 đến 10.")
@@ -26,8 +25,6 @@ def convert_score(score, table = GRADE_TABLE):
         if score >= min_score:
             return letter, gqa4
     
-
-
 #Hàm 3: calculate_gpa
 def calculate_gpa(courses):
     if not courses:
@@ -41,7 +38,6 @@ def calculate_gpa(courses):
         #bỏ qua môn không tính GPA
         if not course.get("counts_in_gpa", True):
             continue
-
         credits = course["credits"]
         score = course["final_score"]
         _, gpa4 = convert_score(score)
@@ -52,11 +48,9 @@ def calculate_gpa(courses):
 
     if total_credits == 0:
         return 0.0, 0.0
-
     gpa_10 = round(weighted_10 / total_credits, 2)
     gpa_4 = round(weighted_4 / total_credits, 2)
     return gpa_10, gpa_4
-
 
     # Hàm 4: Classify
     # Bảng xếp loại học lực của HITC
