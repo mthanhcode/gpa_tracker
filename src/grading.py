@@ -30,6 +30,7 @@ def calculate_gpa(courses):
     if not courses:
         return 0.0, 0.0
 
+    #khởi tạo các biến tích lũy
     total_credits = 0
     weighted_10 = 0.0
     weighted_4 = 0.0
@@ -68,3 +69,13 @@ def classify(gpa4):
         if gpa4 >= min_gpa:
             return label
     return "Yếu"
+
+# Hàm 5: Predict Score
+def predict_score(midterm, target_final):
+    """
+    Tính điểm thi cuối kỳ cần đạt dựa trên điểm TBTK và mục tiêu điểm tổng kết.
+    Công thức: target = 0.4 * midterm + 0.6 * final 
+    => final = (target - 0.4 * midterm) / 0.6
+    """
+    needed_final = (target_final - MIDTERM_WEIGHT * midterm) / FINAL_WEIGHT
+    return round(needed_final, 2)
