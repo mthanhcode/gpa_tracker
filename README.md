@@ -190,3 +190,21 @@ Nếu thiếu key thì dùng giá trị mặc định, không crash.
 **👨‍💻 mthanhcode** · Sinh viên HITC · Capstone Project Python Journey 🎓
 
 </div>
+
+
+---
+
+## 🛠️ Công nghệ & Thư viện mã nguồn mở
+Dự án được xây dựng dựa trên các thư viện mã nguồn mở:
+- [Streamlit](https://streamlit.io/) — Giao diện Web tương tác
+- [Plotly](https://plotly.com/python/) — Biểu đồ dữ liệu trực quan
+- [Pandas](https://pandas.pydata.org/) — Xử lý & Phân tích dữ liệu
+- [Pytest](https://docs.pytest.org/) — Kiểm thử tự động (Unit Test)
+
+---
+
+<div align="center">
+
+🧑‍💻 **[mthanhcode](https://github.com/mthanhcode/gpa_tracker)** · Sinh viên HITC · Capstone Project Python Journey 🎓
+
+</div>
