@@ -301,3 +301,26 @@ with tab3:
                 💡 Để đạt mục tiêu <b>{p_target:.1f}</b>, điểm thi cuối kỳ tối thiểu bạn cần đạt là: <span style="font-size: 1.3rem; color: #0284c7;">{needed:.2f}</span> điểm.
             </div>
             ''', unsafe_allow_html=True)
+
+# --- FOOTER ---
+st.markdown("---")
+st.markdown("""
+<div style='text-align: center; padding-top: 10px; padding-bottom: 20px; color: #64748B;'>
+    <p style='font-size: 15px; margin-bottom: 10px;'>
+        🧑‍💻 <b>mthanhcode</b> · Sinh viên HITC · Capstone Project Python Journey 🎓
+    </p>
+    <a href='https://github.com/mthanhcode/gpa_tracker' target='_blank' style='
+        color: #00d2ff; 
+        text-decoration: none; 
+        font-weight: 600; 
+        padding: 8px 16px; 
+        border: 1px solid #00d2ff; 
+        border-radius: 8px; 
+        display: inline-block; 
+        transition: all 0.3s ease;
+        box-shadow: 0 0 8px rgba(0, 210, 255, 0.2);
+    '>
+        <span style='margin-right: 5px;'>⭐</span> Xem mã nguồn trên GitHub
+    </a>
+</div>
+""", unsafe_allow_html=True)
