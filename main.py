@@ -1,6 +1,6 @@
 from src.grading import calculate_final_score, convert_score, calculate_gpa, classify
 from src.storage import load_courses, save_courses
-
+from src.grading import predict_score as calc_needed_final
 
 def show_menu():
     print("\n===== GPA TRACKER - HITC =====")
@@ -107,9 +107,7 @@ def predict_score(courses):
         print("❌ Vui lòng nhập số hợp lệ (0.0 - 10.0)")
         return
     
-    # Công thức: Final = (Target - 0.4 * Midterm) / 0.6
-    needed = (target - 0.4 * midterm) / 0.6
-
+    needed = calc_needed_final(midterm, target)
     if needed > 10:
         max_possible = midterm * 0.4 + 10.0 * 0.6
         print(f" Mục tiêu không khả thi!")

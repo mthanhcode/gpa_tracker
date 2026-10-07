@@ -1,4 +1,4 @@
-from src.grading import calculate_final_score, convert_score, calculate_gpa, classify
+from src.grading import calculate_final_score, convert_score, calculate_gpa, classify, predict_score
 from src.storage import load_courses, save_courses 
 
 def test_calculate_final_score_normal():
@@ -104,3 +104,19 @@ def test_load_courses_invalid_json(tmp_path, monkeypatch):
     bad_file.write_text("this is not json", encoding = "utf-8")
     monkeypatch.setattr("src.storage.DATA_FILE", bad_file)
     assert load_courses() == []
+# ---- predict_score ----
+def test_predict_score_normal():
+    # (8.5 - 0.4*7.0) / 0.6 = 9.5
+    assert predict_score(7.0, 8.5) == 9.5
+
+def test_predict_score_impossible_target():
+    # TBTK 3.0, muốn 9.0 -> cần 13.0 điểm thi: vượt 10, không khả thi
+    assert predict_score(3.0, 9.0) > 10.0
+
+def test_predict_score_already_reached():
+    # TBTK 10.0, mục tiêu 3.0 -> kết quả âm: không cần thi cũng đạt
+    assert predict_score(10.0, 3.0) < 0
+
+def test_predict_score_rounds_two_decimals():
+    # (7.5 - 0.4*6.5) / 0.6 = 8.1666... -> 8.17
+    assert predict_score(6.5, 7.5) == 8.17
